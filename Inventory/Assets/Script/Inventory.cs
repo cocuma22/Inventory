@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public GameObject inventory;
+    public void AddItem(string name, Material material)
+    {
+        Debug.Log("itemName = " + name + " material = " + material);
+    }
 
 }
