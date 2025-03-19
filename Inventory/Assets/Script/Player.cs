@@ -1,18 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+/*
+    This script provides jumping and movement in Unity 3D - Gatsby
+*/
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private Rigidbody rb;
+    public float MoveSpeed = 5f;
+    private float moveHorizontal;
+    private float moveForward;
+
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        moveHorizontal = Input.GetAxisRaw("Horizontal");
+        moveForward = Input.GetAxisRaw("Vertical");
+    }
+
+    void FixedUpdate()
+    {
+        MovePlayer();
+    }
+
+    void MovePlayer()
+    {
+        Vector3 movement = (transform.right * moveHorizontal + transform.forward * moveForward).normalized;
+        Vector3 targetVelocity = movement * MoveSpeed;
+
+        // apply movement to the Rigidbody
+        Vector3 velocity = rb.velocity;
+        velocity.x = targetVelocity.x;
+        velocity.z = targetVelocity.z;
+        rb.velocity = velocity;
     }
 }
