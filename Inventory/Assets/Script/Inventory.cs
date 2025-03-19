@@ -4,9 +4,24 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public void AddItem(string name, Material material)
+    public ItemSlot[] itemSlot;
+
+    public void AddItem(string name, Sprite sprite)
     {
-        Debug.Log("itemName = " + name + " material = " + material);
+        for (int i = 0; i < itemSlot.Length; i++)
+        {
+            if (itemSlot[i].name == name)
+            {
+                itemSlot[i].UpdateQuantity();
+                return;
+            }
+
+            if (itemSlot[i].isEmpty)
+            {
+                itemSlot[i].AddItem(name, sprite);
+                return;
+            }
+        }
     }
 
 }
