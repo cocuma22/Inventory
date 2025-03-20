@@ -97,6 +97,8 @@ MonoBehaviour:
   isEmpty: 1
   quantityText: {fileID: 8886888968819667918}
   image: {fileID: 1629397121302960214}
+  frame: {fileID: 1549637814462928425}
+  isSelected: 0
 --- !u!1 &1549637814462928425
 GameObject:
   m_ObjectHideFlags: 0

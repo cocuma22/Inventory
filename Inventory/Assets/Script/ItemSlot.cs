@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class ItemSlot : MonoBehaviour
+public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
     //item data
     public string name;
@@ -15,6 +16,11 @@ public class ItemSlot : MonoBehaviour
     //item slot
     [SerializeField] private TMP_Text quantityText;
     [SerializeField] private Image image;
+
+    public GameObject frame;
+    public bool isSelected;
+
+    [SerializeField] private Inventory inventory;
 
     public void AddItem(string name, Sprite sprite)
     {
@@ -27,6 +33,30 @@ public class ItemSlot : MonoBehaviour
 
         image.enabled = true;
         image.sprite = sprite;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            OnLeftClick();
+        }
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            OnRightClick();
+        }
+    }
+
+    public void OnLeftClick()
+    {
+        inventory.DeselectAllSlots();
+        frame.SetActive(true);
+        isSelected = true;
+    }
+
+    public void OnRightClick()
+    {
+
     }
 
     public void UpdateQuantity()

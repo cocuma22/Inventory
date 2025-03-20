@@ -24,4 +24,13 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public void DeselectAllSlots()
+    {
+        for (int i = 0; i < itemSlot.Length; i++)
+        {
+            itemSlot[i].frame.SetActive(false);
+            itemSlot[i].isSelected = false;
+        }
+    }
+
 }
