@@ -6,7 +6,7 @@ public class Inventory : MonoBehaviour
 {
     public ItemSlot[] itemSlot;
 
-    public void AddItem(string name, Sprite sprite)
+    public void AddItem(string name, Sprite sprite, string itemDescription)
     {
         for (int i = 0; i < itemSlot.Length; i++)
         {
@@ -18,7 +18,7 @@ public class Inventory : MonoBehaviour
 
             if (itemSlot[i].isEmpty)
             {
-                itemSlot[i].AddItem(name, sprite);
+                itemSlot[i].AddItem(name, sprite, itemDescription);
                 return;
             }
         }
