@@ -5,6 +5,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public ItemSlot[] itemSlot;
+    public bool isItemSlotFull = false;
 
     public void AddItem(string name, Sprite sprite, string itemDescription)
     {
@@ -19,6 +20,13 @@ public class Inventory : MonoBehaviour
             if (itemSlot[i].isEmpty)
             {
                 itemSlot[i].AddItem(name, sprite, itemDescription);
+
+                //check if the inventory is completely full
+                if (i == itemSlot.Length - 1)
+                {
+                    isItemSlotFull = true;
+                }
+
                 return;
             }
         }
