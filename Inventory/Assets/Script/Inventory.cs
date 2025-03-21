@@ -5,7 +5,9 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public ItemSlot[] itemSlot;
+    public ItemScriptableObj[] items;
     public bool isItemSlotFull = false;
+    public GameObject applyEffectBtn;
 
     public void AddItem(string name, Sprite sprite, string itemDescription)
     {
@@ -28,6 +30,17 @@ public class Inventory : MonoBehaviour
                 }
 
                 return;
+            }
+        }
+    }
+
+    public void UseItem(string itemType)
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i].itemType.ToString() == itemType)
+            {
+                items[i].UseItem();
             }
         }
     }

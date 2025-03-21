@@ -11,8 +11,7 @@ public class Item : MonoBehaviour
     [TextArea]
     [SerializeField] private string itemDescription;
     [SerializeField] private Inventory inventory;
-    public TMP_Text warningText;
-    [SerializeField] private GameObject warningPanel;
+    private Warning warningPanel;
 
     void OnCollisionEnter(Collision collision)
     {
@@ -26,18 +25,9 @@ public class Item : MonoBehaviour
             else
             {
                 Debug.Log("full");
-                StartCoroutine(ShowWarning("The inventory is full"));
+                StartCoroutine(warningPanel.ShowWarning("The inventory is full"));
             }
         }
-    }
-
-    //the warning message is shown for 3 seconds, then it disappears
-    IEnumerator ShowWarning(string message)
-    {
-        warningText.text = message;
-        warningPanel.SetActive(true);
-        yield return new WaitForSeconds(3);
-        warningPanel.SetActive(false);
     }
 
 }

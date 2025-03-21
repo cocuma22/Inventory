@@ -70,6 +70,12 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public void OnClick()
+    {
+        inventory.UseItem(name);
+        Debug.Log("fatto " + name);
+    }
+
     public void OnRightClick()
     {
 
