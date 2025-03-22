@@ -73,7 +73,6 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public void OnClick()
     {
         inventory.UseItem(name);
-        Debug.Log("fatto " + name);
     }
 
     public void OnRightClick()
@@ -81,8 +80,13 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     }
 
-    public void UpdateQuantity()
+    public void AddQuantity()
     {
         quantityText.text = (int.Parse(quantityText.text) + 1).ToString();
+    }
+
+    public void RemoveQuantity()
+    {
+        quantityText.text = (int.Parse(quantityText.text) - 1).ToString();
     }
 }

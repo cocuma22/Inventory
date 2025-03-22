@@ -11,7 +11,7 @@ public class Item : MonoBehaviour
     [TextArea]
     [SerializeField] private string itemDescription;
     [SerializeField] private Inventory inventory;
-    private Warning warningPanel;
+    [SerializeField] private Warning warningPanel;
 
     void OnCollisionEnter(Collision collision)
     {

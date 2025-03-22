@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb5be7c0f6984f95888c3f7f6f1079a, type: 3}
   m_Name: Shield
   m_EditorClassIdentifier: 
-  itemType: 0
+  itemType: 1
   isOneShotEffect: 0
   durationEffectInSeconds: 20

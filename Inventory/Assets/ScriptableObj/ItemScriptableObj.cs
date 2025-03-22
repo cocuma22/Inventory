@@ -14,17 +14,17 @@ public class ItemScriptableObj : ScriptableObject
     public enum ItemType
     {
         none,
-        shield,
-        healer
+        Shield,
+        Healer
     }
 
     public void UseItem()
     {
-        if (itemType == ItemType.healer)
+        if (itemType == ItemType.Healer)
         {
             GameObject.Find("Health").GetComponent<HealthManager>().AddLife();
         }
-        if (itemType == ItemType.shield)
+        if (itemType == ItemType.Shield)
         {
             GameObject.Find("Player").GetComponent<ShieldManager>().ActivateProtection();
         }

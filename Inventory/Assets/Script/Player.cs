@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 /*
@@ -10,6 +11,10 @@ public class Player : MonoBehaviour
     public float MoveSpeed = 5f;
     private float moveHorizontal;
     private float moveForward;
+
+    [SerializeField] HealthManager healthManager;
+
+    [SerializeField] Vector3 restartPosition;
 
     void Start()
     {
@@ -38,5 +43,12 @@ public class Player : MonoBehaviour
         velocity.x = targetVelocity.x;
         velocity.z = targetVelocity.z;
         rb.velocity = velocity;
+
+        if (this.gameObject.transform.position.y < -20)
+        {
+            this.gameObject.transform.position = restartPosition;
+
+            healthManager.RemoveLife();
+        }
     }
 }

@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour
         {
             if (itemSlot[i].name == name)
             {
-                itemSlot[i].UpdateQuantity();
+                itemSlot[i].AddQuantity();
                 return;
             }
 

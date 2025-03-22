@@ -11,8 +11,8 @@ public class Warning : MonoBehaviour
     public IEnumerator ShowWarning(string message)
     {
         warningText.text = message;
-        gameObject.SetActive(true);
+        this.gameObject.SetActive(true);
         yield return new WaitForSeconds(3);
-        gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 }
