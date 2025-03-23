@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     private float moveForward;
 
     [SerializeField] HealthManager healthManager;
+    [SerializeField] ShieldManager shieldManager;
 
     [SerializeField] Vector3 restartPosition;
 
@@ -48,7 +49,10 @@ public class Player : MonoBehaviour
         {
             this.gameObject.transform.position = restartPosition;
 
-            healthManager.RemoveLife();
+            if (!shieldManager.isShieldEffectActive)
+            {
+                healthManager.RemoveLife();
+            }
         }
     }
 }

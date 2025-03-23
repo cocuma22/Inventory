@@ -48,10 +48,6 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         {
             OnLeftClick();
         }
-        if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            OnRightClick();
-        }
     }
 
     public void OnLeftClick()
@@ -72,12 +68,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     public void OnClick()
     {
-        inventory.UseItem(name);
-    }
-
-    public void OnRightClick()
-    {
-
+        inventory.UseItem(itemDescriptionName.text);
     }
 
     public void AddQuantity()

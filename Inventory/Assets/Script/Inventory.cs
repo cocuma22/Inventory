@@ -36,6 +36,7 @@ public class Inventory : MonoBehaviour
 
     public void UseItem(string itemType)
     {
+        Debug.Log("nell'inventario l'itemType è " + itemType);
         for (int i = 0; i < items.Length; i++)
         {
             if (items[i].itemType.ToString() == itemType)

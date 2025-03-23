@@ -292,6 +292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 5
   healthManager: {fileID: 1834029392}
+  shieldManager: {fileID: 113775977}
   restartPosition: {x: 0, y: 1, z: 0}
 --- !u!54 &113775972
 Rigidbody:
@@ -422,6 +423,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b485c87b88843f795121e7eeb451aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shieldEffectMaterial: {fileID: 2100000, guid: 09632abc4590440b7a5b9f00b3572022,
+    type: 2}
+  durationEffectInSeconds: 20
+  isShieldEffectActive: 0
+  warningPanel: {fileID: 1795085648}
 --- !u!1 &201059811
 GameObject:
   m_ObjectHideFlags: 0

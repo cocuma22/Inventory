@@ -20,6 +20,7 @@ public class ItemScriptableObj : ScriptableObject
 
     public void UseItem()
     {
+        Debug.Log("nel SO itemType = " + itemType.ToString());
         if (itemType == ItemType.Healer)
         {
             GameObject.Find("Health").GetComponent<HealthManager>().AddLife();
