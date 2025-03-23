@@ -34,16 +34,30 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void UseItem(string itemType)
+    public bool UseItem(string itemType)
     {
-        Debug.Log("nell'inventario l'itemType è " + itemType);
+        bool usable = false;
+
         for (int i = 0; i < items.Length; i++)
         {
             if (items[i].itemType.ToString() == itemType)
             {
-                items[i].UseItem();
+                usable = items[i].UseItem();
             }
         }
+
+        if (usable)
+        {
+            for (int i = 0; i < itemSlot.Length; i++)
+            {
+                if (itemSlot[i].name == itemType)
+                {
+                    itemSlot[i].RemoveQuantity();
+                    return usable;
+                }
+            }
+        }
+        return false;
     }
 
     public void DeselectAllSlots()

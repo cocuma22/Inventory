@@ -6,47 +6,46 @@ using UnityEngine.UI;
 public class HealthManager : MonoBehaviour
 {
     public GameObject[] lifeImages;
-    private bool isHealthFull = true;
+    //public bool isHealthFull = true;
+    public int currentLifes = 5;
+    public int maxLifes = 5;
     [SerializeField] private Warning warningPanel;
 
     public void AddLife()
     {
-        if (!isHealthFull)
+        //if (currentLifes != maxLifes)
+        //{
+        for (int i = 0; i < lifeImages.Length - 1; i++)
         {
-            for (int i = lifeImages.Length - 1; i >= 0; i--)
+            if (!lifeImages[i].activeSelf)
             {
-                if (!lifeImages[i].activeSelf)
-                {
-                    lifeImages[i].SetActive(true);
-                    return;
-                }
-                if (i == 0)
+                lifeImages[i].SetActive(true);
+                currentLifes++;
+                /*if (i == lifeImages.Length - 1)
                 {
                     isHealthFull = true;
-                    StartCoroutine(warningPanel.ShowWarning("The health is full"));
-                }
+                }*/
+                return;
             }
         }
-        else
-        {
-            isHealthFull = true;
-            StartCoroutine(warningPanel.ShowWarning("The health is full"));
-        }
+        //}
     }
 
     public void RemoveLife()
     {
-        for (int i = lifeImages.Length - 1; i >= 0; i--)
+        for (int i = 0; i < lifeImages.Length - 1; i++)
         {
             if (lifeImages[i].activeSelf)
             {
                 lifeImages[i].SetActive(false);
-                if (i == 0)
+                currentLifes--;
+                //if (i == lifeImages.Length - 1)
+                if (currentLifes == 0)
                 {
-                    StartCoroutine(warningPanel.ShowWarning("You are dead"));
+                    warningPanel.SetWarning("You are dead");
                     Destroy(GameObject.Find("Player"));
                 }
-                isHealthFull = false;
+                //isHealthFull = false;
                 return;
             }
         }

@@ -18,17 +18,38 @@ public class ItemScriptableObj : ScriptableObject
         Healer
     }
 
-    public void UseItem()
+    public bool UseItem()
     {
-        Debug.Log("nel SO itemType = " + itemType.ToString());
         if (itemType == ItemType.Healer)
         {
-            GameObject.Find("Health").GetComponent<HealthManager>().AddLife();
+            HealthManager healthManager = GameObject.Find("Health").GetComponent<HealthManager>();
+            if (healthManager.currentLifes == healthManager.maxLifes)
+            {
+                GameObject.Find("Warning").GetComponent<Warning>().SetWarning("The health is full");
+                return false;
+            }
+            else
+            {
+                healthManager.AddLife();
+                return true;
+            }
+
         }
         if (itemType == ItemType.Shield)
         {
-            GameObject.Find("Player").GetComponent<ShieldManager>().ActivateProtection();
+            ShieldManager shieldManager = GameObject.Find("Player").GetComponent<ShieldManager>();
+            if (shieldManager.isShieldEffectActive)
+            {
+                GameObject.Find("Warning").GetComponent<Warning>().SetWarning("Shield effect is already active");
+                return false;
+            }
+            else
+            {
+                shieldManager.ActivateProtection();
+                return true;
+            }
         }
+        return false;
     }
 
 }

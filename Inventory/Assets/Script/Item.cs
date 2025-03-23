@@ -25,7 +25,7 @@ public class Item : MonoBehaviour
             else
             {
                 Debug.Log("full");
-                StartCoroutine(warningPanel.ShowWarning("The inventory is full"));
+                warningPanel.SetWarning("The inventory is full");
             }
         }
     }

@@ -425,7 +425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shieldEffectMaterial: {fileID: 2100000, guid: 09632abc4590440b7a5b9f00b3572022,
     type: 2}
-  durationEffectInSeconds: 20
+  durationEffectInSeconds: 10
   isShieldEffectActive: 0
   warningPanel: {fileID: 1795085648}
 --- !u!1 &201059811
@@ -4408,7 +4408,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1795085645
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4436,7 +4436,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1795085644}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -4540,6 +4540,8 @@ MonoBehaviour:
   - {fileID: 1155197467}
   - {fileID: 1228400348}
   - {fileID: 1663702948}
+  currentLifes: 5
+  maxLifes: 5
   warningPanel: {fileID: 1795085648}
 --- !u!114 &1834029393
 MonoBehaviour:

@@ -22,11 +22,13 @@ public class ShieldManager : MonoBehaviour
 
     public IEnumerator ActivateShieldEffect()
     {
+
         isShieldEffectActive = true;
         this.gameObject.GetComponent<Renderer>().material = shieldEffectMaterial;
         yield return new WaitForSeconds(durationEffectInSeconds);
         this.gameObject.GetComponent<Renderer>().material = originalMaterial;
         isShieldEffectActive = false;
-        StartCoroutine(warningPanel.ShowWarning("Shield effect is over"));
+        warningPanel.SetWarning("Shield effect is over");
+
     }
 }

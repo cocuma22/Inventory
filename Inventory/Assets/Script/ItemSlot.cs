@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
 public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
@@ -31,11 +32,12 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public void AddItem(string name, Sprite sprite, string itemDescription)
     {
         this.name = name;
+        this.quantity += 1;
         this.sprite = sprite;
         this.itemDescription = itemDescription;
         isEmpty = false;
 
-        quantityText.text = "1";
+        quantityText.text = this.quantity.ToString();
         quantityText.enabled = true;
 
         image.enabled = true;
@@ -68,16 +70,33 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     public void OnClick()
     {
-        inventory.UseItem(itemDescriptionName.text);
+        bool usable = inventory.UseItem(itemDescriptionName.text);
+        quantityText.text = quantity.ToString();
+    }
+
+    private void EmptySlot()
+    {
+        quantityText.enabled = false;
+        image.enabled = false;
+
+        itemDescriptionText.text = "";
+        itemDescriptionName.text = "";
+        itemDescriptionImage.enabled = false;
     }
 
     public void AddQuantity()
     {
+        quantity += 1;
         quantityText.text = (int.Parse(quantityText.text) + 1).ToString();
     }
 
     public void RemoveQuantity()
     {
+        quantity -= 1;
         quantityText.text = (int.Parse(quantityText.text) - 1).ToString();
+        if (quantity <= 0)
+        {
+            EmptySlot();
+        }
     }
 }
