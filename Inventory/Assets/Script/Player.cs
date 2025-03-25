@@ -7,26 +7,25 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private Rigidbody rb;
-    public float MoveSpeed = 5f;
-    private float moveHorizontal;
-    private float moveForward;
+    Rigidbody _rb;
+    public float moveSpeed = 5f;
+    float _moveHorizontal;
+    float _moveForward;
 
-    [SerializeField] HealthManager healthManager;
-    [SerializeField] ShieldManager shieldManager;
-
-    [SerializeField] Vector3 restartPosition;
+    [SerializeField] HealthManager _healthManager;
+    [SerializeField] ShieldManager _shieldManager;
+    [SerializeField] Vector3 _restartPosition;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
+        _rb = GetComponent<Rigidbody>();
+        _rb.freezeRotation = true;
     }
 
     void Update()
     {
-        moveHorizontal = Input.GetAxisRaw("Horizontal");
-        moveForward = Input.GetAxisRaw("Vertical");
+        _moveHorizontal = Input.GetAxisRaw("Horizontal");
+        _moveForward = Input.GetAxisRaw("Vertical");
     }
 
     void FixedUpdate()
@@ -36,22 +35,23 @@ public class Player : MonoBehaviour
 
     void MovePlayer()
     {
-        Vector3 movement = (transform.right * moveHorizontal + transform.forward * moveForward).normalized;
-        Vector3 targetVelocity = movement * MoveSpeed;
+        Vector3 movement = (transform.right * _moveHorizontal + transform.forward * _moveForward).normalized;
+        Vector3 targetVelocity = movement * moveSpeed;
 
         // apply movement to the Rigidbody
-        Vector3 velocity = rb.velocity;
+        Vector3 velocity = _rb.velocity;
         velocity.x = targetVelocity.x;
         velocity.z = targetVelocity.z;
-        rb.velocity = velocity;
+        _rb.velocity = velocity;
 
+        //when the player exits the platform, it loses one life (if the is no shield effect active)
         if (this.gameObject.transform.position.y < -20)
         {
-            this.gameObject.transform.position = restartPosition;
+            this.gameObject.transform.position = _restartPosition;
 
-            if (!shieldManager.isShieldEffectActive)
+            if (!_shieldManager.isShieldEffectActive)
             {
-                healthManager.RemoveLife();
+                _healthManager.RemoveLife();
             }
         }
     }

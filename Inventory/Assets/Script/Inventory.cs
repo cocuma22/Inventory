@@ -1,30 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public ItemSlot[] itemSlot;
-    public ItemScriptableObj[] items;
+    [SerializeField] ItemSlot[] _itemSlot;
+    [SerializeField] ItemScriptableObj[] _items;
     public bool isItemSlotFull = false;
     public GameObject applyEffectBtn;
 
-    public void AddItem(string name, Sprite sprite, string itemDescription)
+    public void AddItem(string itemName, Sprite sprite, string itemDescription)
     {
-        for (int i = 0; i < itemSlot.Length; i++)
+        for (int i = 0; i < _itemSlot.Length; i++)
         {
-            if (itemSlot[i].name == name)
+            //update item quantity
+            if (_itemSlot[i].itemName == itemName)
             {
-                itemSlot[i].AddQuantity();
+                _itemSlot[i].AddQuantity();
                 return;
             }
 
-            if (itemSlot[i].isEmpty)
+            if (_itemSlot[i].isEmpty)
             {
-                itemSlot[i].AddItem(name, sprite, itemDescription);
+                _itemSlot[i].AddItem(itemName, sprite, itemDescription);
 
                 //check if the inventory is completely full
-                if (i == itemSlot.Length - 1)
+                if (i == _itemSlot.Length - 1)
                 {
                     isItemSlotFull = true;
                 }
@@ -38,21 +37,21 @@ public class Inventory : MonoBehaviour
     {
         bool usable = false;
 
-        for (int i = 0; i < items.Length; i++)
+        for (int i = 0; i < _items.Length; i++)
         {
-            if (items[i].itemType.ToString() == itemType)
+            if (_items[i].itemType.ToString() == itemType)
             {
-                usable = items[i].UseItem();
+                usable = _items[i].UseItem();
             }
         }
 
         if (usable)
         {
-            for (int i = 0; i < itemSlot.Length; i++)
+            for (int i = 0; i < _itemSlot.Length; i++)
             {
-                if (itemSlot[i].name == itemType)
+                if (_itemSlot[i].itemName == itemType)
                 {
-                    itemSlot[i].RemoveQuantity();
+                    _itemSlot[i].RemoveQuantity();
                     return usable;
                 }
             }
@@ -62,10 +61,10 @@ public class Inventory : MonoBehaviour
 
     public void DeselectAllSlots()
     {
-        for (int i = 0; i < itemSlot.Length; i++)
+        for (int i = 0; i < _itemSlot.Length; i++)
         {
-            itemSlot[i].frame.SetActive(false);
-            itemSlot[i].isSelected = false;
+            _itemSlot[i].frame.SetActive(false);
+            _itemSlot[i].isSelected = false;
         }
     }
 

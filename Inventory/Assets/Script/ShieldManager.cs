@@ -1,18 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShieldManager : MonoBehaviour
 {
-    [SerializeField] Material shieldEffectMaterial;
-    private Material originalMaterial;
-    [SerializeField] private int durationEffectInSeconds = 10;
+    [SerializeField] Material _shieldEffectMaterial;
+    Material _originalMaterial;
+    [SerializeField] int _durationEffectInSeconds = 10;
     public bool isShieldEffectActive = false;
-    [SerializeField] private Warning warningPanel;
+    [SerializeField] Warning _warningPanel;
 
     private void Start()
     {
-        originalMaterial = this.gameObject.GetComponent<Renderer>().material;
+        _originalMaterial = this.gameObject.GetComponent<Renderer>().material;
     }
 
     public void ActivateProtection()
@@ -20,15 +19,17 @@ public class ShieldManager : MonoBehaviour
         StartCoroutine(ActivateShieldEffect());
     }
 
+    //When the shield effect is active, the player temporarily changes its color
     public IEnumerator ActivateShieldEffect()
     {
-
         isShieldEffectActive = true;
-        this.gameObject.GetComponent<Renderer>().material = shieldEffectMaterial;
-        yield return new WaitForSeconds(durationEffectInSeconds);
-        this.gameObject.GetComponent<Renderer>().material = originalMaterial;
+        this.gameObject.GetComponent<Renderer>().material = _shieldEffectMaterial;
+
+        yield return new WaitForSeconds(_durationEffectInSeconds);
+
+        this.gameObject.GetComponent<Renderer>().material = _originalMaterial;
         isShieldEffectActive = false;
-        warningPanel.SetWarning("Shield effect is over");
+        _warningPanel.SetWarning("Shield effect is over");
 
     }
 }

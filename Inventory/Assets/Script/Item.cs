@@ -1,31 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    [SerializeField] private string name;
-    [SerializeField] private Sprite sprite;
+    [SerializeField] string _itemName;
+    [SerializeField] Sprite _sprite;
 
     [TextArea]
-    [SerializeField] private string itemDescription;
-    [SerializeField] private Inventory inventory;
-    [SerializeField] private Warning warningPanel;
+    [SerializeField] string _itemDescription;
+    [SerializeField] Inventory _inventory;
+    [SerializeField] Warning _warningPanel;
 
+    //player collects items through collision but only if the inventory isn't full
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            if (!inventory.isItemSlotFull)
+            if (!_inventory.isItemSlotFull)
             {
-                inventory.AddItem(name, sprite, itemDescription);
+                _inventory.AddItem(_itemName, _sprite, _itemDescription);
                 Destroy(gameObject);
             }
             else
             {
-                Debug.Log("full");
-                warningPanel.SetWarning("The inventory is full");
+                _warningPanel.SetWarning("The inventory is full");
             }
         }
     }

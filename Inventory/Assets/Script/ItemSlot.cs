@@ -1,47 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System;
+using Unity.VisualScripting;
 
 public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
     //item data
-    public string name;
+    public string itemName;
     public int quantity;
     public Sprite sprite;
     public bool isEmpty = true;
     public string itemDescription;
 
     //item slot
-    [SerializeField] private TMP_Text quantityText;
-    [SerializeField] private Image image;
+    [SerializeField] TMP_Text _quantityText;
+    [SerializeField] Image _image;
 
     //item description slot
-    public Image itemDescriptionImage;
-    public TMP_Text itemDescriptionName;
-    public TMP_Text itemDescriptionText;
+    [SerializeField] Image _itemDescriptionImage;
+    [SerializeField] TMP_Text _itemDescriptionName;
+    [SerializeField] TMP_Text _itemDescriptionText;
 
+    //item selection
     public GameObject frame;
     public bool isSelected;
 
-    [SerializeField] private Inventory inventory;
+    [SerializeField] Inventory _inventory;
 
-    public void AddItem(string name, Sprite sprite, string itemDescription)
+    public void AddItem(string itemName, Sprite sprite, string itemDescription)
     {
-        this.name = name;
+        this.itemName = itemName;
         this.quantity += 1;
         this.sprite = sprite;
         this.itemDescription = itemDescription;
         isEmpty = false;
 
-        quantityText.text = this.quantity.ToString();
-        quantityText.enabled = true;
+        _quantityText.text = this.quantity.ToString();
+        _quantityText.enabled = true;
 
-        image.enabled = true;
-        image.sprite = sprite;
+        _image.enabled = true;
+        _image.sprite = sprite;
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -54,46 +53,46 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     public void OnLeftClick()
     {
-        inventory.DeselectAllSlots();
+        _inventory.DeselectAllSlots();
         frame.SetActive(true);
         isSelected = true;
-        itemDescriptionName.text = name;
-        itemDescriptionText.text = itemDescription;
-        itemDescriptionImage.sprite = sprite;
-        itemDescriptionImage.enabled = true;
+        _itemDescriptionName.text = itemName;
+        _itemDescriptionText.text = itemDescription;
+        _itemDescriptionImage.sprite = sprite;
+        _itemDescriptionImage.enabled = true;
 
-        if (itemDescriptionImage.sprite == null)
+        if (_itemDescriptionImage.sprite == null)
         {
-            itemDescriptionImage.enabled = false;
+            _itemDescriptionImage.enabled = false;
         }
     }
 
     public void OnClick()
     {
-        bool usable = inventory.UseItem(itemDescriptionName.text);
-        quantityText.text = quantity.ToString();
+        bool usable = _inventory.UseItem(_itemDescriptionName.text);
+        _quantityText.text = quantity.ToString();
     }
 
     private void EmptySlot()
     {
-        quantityText.enabled = false;
-        image.enabled = false;
+        _quantityText.enabled = false;
+        _image.enabled = false;
 
-        itemDescriptionText.text = "";
-        itemDescriptionName.text = "";
-        itemDescriptionImage.enabled = false;
+        _itemDescriptionText.text = "";
+        _itemDescriptionName.text = "";
+        _itemDescriptionImage.enabled = false;
     }
 
     public void AddQuantity()
     {
         quantity += 1;
-        quantityText.text = (int.Parse(quantityText.text) + 1).ToString();
+        _quantityText.text = (int.Parse(_quantityText.text) + 1).ToString();
     }
 
     public void RemoveQuantity()
     {
         quantity -= 1;
-        quantityText.text = (int.Parse(quantityText.text) - 1).ToString();
+        _quantityText.text = (int.Parse(_quantityText.text) - 1).ToString();
         if (quantity <= 0)
         {
             EmptySlot();

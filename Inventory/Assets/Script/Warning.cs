@@ -1,26 +1,28 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Warning : MonoBehaviour
 {
-    [SerializeField] private TMP_Text warningText;
+    [SerializeField] TMP_Text _warningText;
+    [SerializeField] int _timerInSeconds = 3;
 
     public void SetWarning(string message)
     {
         StartCoroutine(ShowWarning(message));
     }
 
-    //the warning message is shown for 3 seconds, then it disappears
+    //the warning message is shown for 'timerInSeconds' seconds, then it disappears
     private IEnumerator ShowWarning(string message)
     {
-        warningText.text = message;
+        _warningText.text = message;
         this.gameObject.GetComponent<Image>().enabled = true;
-        warningText.enabled = true;
-        yield return new WaitForSeconds(3);
+        _warningText.enabled = true;
+
+        yield return new WaitForSeconds(_timerInSeconds);
+
         this.gameObject.GetComponent<Image>().enabled = false;
-        warningText.enabled = false;
+        _warningText.enabled = false;
     }
 }

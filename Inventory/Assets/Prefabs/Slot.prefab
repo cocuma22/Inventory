@@ -91,19 +91,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 437a6f7ffe2fb4fce853c88d9e415f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
+  itemName: 
   quantity: 0
   sprite: {fileID: 0}
   isEmpty: 1
   itemDescription: 
-  quantityText: {fileID: 8886888968819667918}
-  image: {fileID: 1629397121302960214}
-  itemDescriptionImage: {fileID: 0}
-  itemDescriptionName: {fileID: 0}
-  itemDescriptionText: {fileID: 0}
+  _quantityText: {fileID: 8886888968819667918}
+  _image: {fileID: 1629397121302960214}
+  _itemDescriptionImage: {fileID: 0}
+  _itemDescriptionName: {fileID: 0}
+  _itemDescriptionText: {fileID: 0}
   frame: {fileID: 1549637814462928425}
   isSelected: 0
-  inventory: {fileID: 0}
+  _inventory: {fileID: 0}
 --- !u!1 &1549637814462928425
 GameObject:
   m_ObjectHideFlags: 0

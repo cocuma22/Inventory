@@ -1,15 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
 public class ItemScriptableObj : ScriptableObject
 {
     public ItemType itemType = new ItemType();
-
-    public bool isOneShotEffect;
-
-    public int durationEffectInSeconds;
 
     public enum ItemType
     {
@@ -20,6 +14,7 @@ public class ItemScriptableObj : ScriptableObject
 
     public bool UseItem()
     {
+        //healer is used only if the player's health isnt' full
         if (itemType == ItemType.Healer)
         {
             HealthManager healthManager = GameObject.Find("Health").GetComponent<HealthManager>();
@@ -35,6 +30,8 @@ public class ItemScriptableObj : ScriptableObject
             }
 
         }
+
+        //shield effect is used only if there isn't another shield effect already active
         if (itemType == ItemType.Shield)
         {
             ShieldManager shieldManager = GameObject.Find("Player").GetComponent<ShieldManager>();
