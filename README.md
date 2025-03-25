@@ -1,0 +1,1 @@
+![Inventory image](Inventory.png)
